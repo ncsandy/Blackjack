@@ -7,16 +7,16 @@ import lombok.ToString;
 @ToString
 public class Card {
 
-    @Setter
+    @Getter @Setter
     Suite suite;
 
-    @Setter
+    @Getter @Setter
     Face face;
 
-    @Setter
+    @Getter @Setter
     int value;
 
-    @Setter
+    @Getter @Setter
     boolean ace;
     public Card() {
     }

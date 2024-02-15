@@ -9,27 +9,35 @@ public class Main {
         this.messages = new Messages(); // Create message object since it will be used quite a bit
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args){
         // Main Game Loop
         Main main = new Main();
         main.startGame();
     }
 
-    private void startGame() {
+    private void startGame(){
         messages.getWelcomeMessage();
 
+
         Player player = createPlayer();
+
         Dealer dealer = new Dealer();
 
         int numberOfDecks = getNumberOfDecksFromPlayer();
         ArrayList<Card> tableDeck = createAndShuffleDeck(numberOfDecks);
 
         dealCardsOnTable(tableDeck,player,dealer);
+
     }
 
     private Player createPlayer() {
         System.out.println("What is your name?");
         String playerName = getPlayerInput();
+
+        if(playerName.isEmpty()) {
+            playerName = "Player 1";
+        }
+
         return new Player(playerName);
     }
 

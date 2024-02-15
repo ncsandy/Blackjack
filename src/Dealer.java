@@ -1,12 +1,25 @@
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
 import java.util.ArrayList;
 
-@NoArgsConstructor
-public class Dealer {
+public class Dealer implements CardHolder {
 
-    @Getter @Setter
-    private ArrayList<Card> hand;
+    private final ArrayList<Card> hand;
+
+    public Dealer() {
+        this.hand = new ArrayList<>();
+    }
+
+    @Override
+    public void addCard(Card card) {
+        this.hand.add(card);
+    }
+
+    @Override
+    public void clearHand() {
+        this.hand.clear();
+    }
+
+    public ArrayList<Card> getHand() {
+        return hand;
+    }
+
 }
