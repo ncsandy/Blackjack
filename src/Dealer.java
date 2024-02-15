@@ -1,7 +1,12 @@
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.util.ArrayList;
 
+@NoArgsConstructor
 public class Dealer {
-    public ArrayList<Card> dealerHand (Card card) {
-        return new ArrayList<>();
-    }
+
+    @Getter @Setter
+    private ArrayList<Card> hand;
 }

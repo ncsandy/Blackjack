@@ -2,6 +2,13 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
+    private final Scanner scanner;
+    private final Messages messages;
+    public Main() {
+        this.scanner = new Scanner(System.in); // Create a single Scanner object
+        this.messages = new Messages(); // Create message object since it will be used quite a bit
+    }
+
     public static void main(String[] args) {
         // Main Game Loop
         Main main = new Main();
@@ -9,15 +16,19 @@ public class Main {
     }
 
     private void startGame() {
+        messages.getWelcomeMessage();
+
         Player player = createPlayer();
+        Dealer dealer = new Dealer();
+
         int numberOfDecks = getNumberOfDecksFromPlayer();
         ArrayList<Card> tableDeck = createAndShuffleDeck(numberOfDecks);
 
-
+        dealCardsOnTable(tableDeck,player,dealer);
     }
 
     private Player createPlayer() {
-        System.out.println("Welcome to BlackJack, what is your name?");
+        System.out.println("What is your name?");
         String playerName = getPlayerInput();
         return new Player(playerName);
     }
@@ -34,8 +45,11 @@ public class Main {
     }
 
     private String getPlayerInput() {
-        Scanner scanner = new Scanner(System.in);  // Create a Scanner object
         return scanner.nextLine();
+    }
+    private void dealCardsOnTable(ArrayList<Card> cards, Player player, Dealer dealer) {
+        Table table = new Table();
+        table.dealCards(cards, player, dealer);
     }
 
 }

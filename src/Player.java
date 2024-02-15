@@ -8,9 +8,12 @@ public class Player {
     @Getter @Setter
     private String name;
 
-    public ArrayList<Card> playerHand (Card card) {
-        return new ArrayList<>();
-    }
+    @Getter @Setter
+    private int money;
+
+    @Getter @Setter
+    private ArrayList<Card> hand;
+
     Player(String name) {
         this.name = name;
     }
