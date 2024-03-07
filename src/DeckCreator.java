@@ -5,9 +5,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+@Setter
+@Getter
 public class DeckCreator {
 
-    @Getter @Setter
     ArrayList<Card> deck;
     public ArrayList<Card> dealerDeck(int decks) {
         return IntStream.range(0, decks)

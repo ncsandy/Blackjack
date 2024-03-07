@@ -1,9 +1,11 @@
+import java.util.Scanner;
+
 public class Formatter {
     int convertToInt(String playerInput) {
         int parsedNumber = 0;
         try {
-           parsedNumber = Integer.parseInt(playerInput);
-        }catch (NumberFormatException e) {
+            parsedNumber = Integer.parseInt(playerInput);
+        } catch (NumberFormatException e) {
             System.out.println("Failed to parse input into an integer, please enter a proper number! " + e.getMessage());
         }
         return parsedNumber;
@@ -11,7 +13,7 @@ public class Formatter {
 
     void getCardInfo(Card card) {
 
-        String cardInfo = "You have a ";
+        String cardInfo = "";
 
         if (card.isAce()) {
             cardInfo += "Ace";
@@ -21,7 +23,8 @@ public class Formatter {
             cardInfo += card.getValue();
         }
 
-        cardInfo += " of " + card.getSuite().getSuiteName() + "\n";
+        cardInfo += " of " + card.getSuite().getSuiteName();
         System.out.println(cardInfo);
     }
+
 }

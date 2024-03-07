@@ -14,39 +14,46 @@ public class Main {
         Main main = new Main();
         main.startGame();
     }
-
     private void startGame(){
         messages.getWelcomeMessage();
 
-
+        // Create player object
         Player player = createPlayer();
 
+        //Create Dealer object
         Dealer dealer = new Dealer();
 
+        // Create Table object
+
+        Table table = new Table();
+
+        // Get number of decks from player
         int numberOfDecks = getNumberOfDecksFromPlayer();
+
+        // Create and shuffle deck
         ArrayList<Card> tableDeck = createAndShuffleDeck(numberOfDecks);
 
-        dealCardsOnTable(tableDeck,player,dealer);
+        // Deal cards, and calculate scores
+        dealCardsOnTable(tableDeck,player,dealer, table);
+
+        // Display Message
+        messages.getPlayerAction();
+
+        // Get Player input for hit/stay
+       table.playGame(validateInput(), tableDeck, player, dealer);
+
+
 
     }
-
     private Player createPlayer() {
         System.out.println("What is your name?");
         String playerName = getPlayerInput();
-
-        if(playerName.isEmpty()) {
-            playerName = "Player 1";
-        }
-
-        return new Player(playerName);
-    }
-
-    private int getNumberOfDecksFromPlayer() {
+        return new Player(playerName.isEmpty() ? "Player 1" : playerName);
+    }private int getNumberOfDecksFromPlayer() {
         Formatter formatter = new Formatter();
         System.out.println("How many decks would you like to play with?");
         return formatter.convertToInt(getPlayerInput());
     }
-
     private ArrayList<Card> createAndShuffleDeck(int numberOfDecks) {
         DeckCreator deckCreator = new DeckCreator(numberOfDecks);
         return deckCreator.getDeck();
@@ -55,9 +62,24 @@ public class Main {
     private String getPlayerInput() {
         return scanner.nextLine();
     }
-    private void dealCardsOnTable(ArrayList<Card> cards, Player player, Dealer dealer) {
-        Table table = new Table();
+    private void dealCardsOnTable(ArrayList<Card> cards, Player player, Dealer dealer, Table table) {
         table.dealCards(cards, player, dealer);
     }
-
+    private int validateInput() {
+        int selection;
+        do {
+            selection = Integer.parseInt(scanner.nextLine());
+            switch (selection) {
+                case 1:
+                    System.out.println("You chose hit");
+                    break;
+                case 2:
+                    System.out.println("You chose stay");
+                    break;
+                default:
+                    System.out.println("Let's try that again!");
+            }
+        } while (selection != 1 && selection != 2);
+        return selection;
+    }
 }

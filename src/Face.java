@@ -1,3 +1,6 @@
+import lombok.Getter;
+
+@Getter
 public enum Face {
     KING("King"),
     QUEEN("Queen"),
@@ -9,7 +12,4 @@ public enum Face {
         this.faceName = faceName;
     }
 
-    public String getFaceName() {
-        return faceName;
-    }
 }

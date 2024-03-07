@@ -14,11 +14,10 @@ public class Table {
            dealer.addCard(dealCard(tableDeck));
        }
 
-       readCard(player.getHand());
+       player.setScore(readCardPlayer(player.getHand()));
+       dealer.setScore(calculateScore(dealer.getHand()));
 
-        System.out.println("The dealer is showing + \n");
-        readCardDealer(dealer.getHand());
-
+       firstDealerRead(dealer.getHand());
 
     }
     private Card dealCard(ArrayList<Card> deck) {
@@ -26,12 +25,37 @@ public class Table {
         return deck.remove(index);
     }
 
-    private void readCard(ArrayList<Card> deltCards) {
-        for(Card card: deltCards) {
+    private int readCardPlayer(ArrayList<Card> dealtCards) {
+        System.out.println("You have ");
+        int score = 0;
+        for(Card card: dealtCards) {
+            score += card.getValue();
             formatter.getCardInfo(card);
         }
+
+        System.out.println("Your score is " + score);
+
+        return score;
     }
-    private void readCardDealer(ArrayList<Card> dealerHand) {
+    private void firstDealerRead(ArrayList<Card> dealerHand) {
+        System.out.println("\nThe dealer is showing...");
         formatter.getCardInfo(dealerHand.get(0));
+    }
+
+    private int calculateScore(ArrayList<Card> cards) {
+        int score = 0;
+        for(Card card: cards) {
+            score += card.getValue();
+        }
+        return score;
+    }
+    protected void playGame(int playerChoice, ArrayList<Card> deck, Player player, Dealer dealer ) {
+        if (playerChoice == 1) {
+            player.addCard(dealCard(deck));
+            System.out.println("Your score is " + calculateScore(player.getHand()));
+        } else if (playerChoice == 2) {
+            System.out.println("Dealer score is: " + calculateScore(dealer.getHand()));
+            dealer.addCard(dealCard(deck));
+        }
     }
 }

@@ -1,11 +1,19 @@
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.ArrayList;
 
+@Getter
 public class Dealer implements CardHolder {
 
     private final ArrayList<Card> hand;
 
+    @Getter @Setter
+    private int score;
+
     public Dealer() {
         this.hand = new ArrayList<>();
+        this.score = 0;
     }
 
     @Override
@@ -16,10 +24,6 @@ public class Dealer implements CardHolder {
     @Override
     public void clearHand() {
         this.hand.clear();
-    }
-
-    public ArrayList<Card> getHand() {
-        return hand;
     }
 
 }
