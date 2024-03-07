@@ -57,8 +57,8 @@ public class Table {
             player.addCard(dealCard(deck));
             System.out.println("Your score is " + calculateScore(player.getHand(), false));
         } else if (playerChoice == 2) {
-            System.out.println("Dealer score is: " + calculateScore(dealer.getHand(), true));
             dealer.addCard(dealCard(deck));
+            System.out.println("Dealer score is: " + calculateScore(dealer.getHand(), true));
         }
     }
 }
