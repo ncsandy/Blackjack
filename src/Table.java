@@ -15,7 +15,7 @@ public class Table {
        }
 
        player.setScore(readCardPlayer(player.getHand()));
-       dealer.setScore(calculateScore(dealer.getHand()));
+       dealer.setScore(calculateScore(dealer.getHand(), true));
 
        firstDealerRead(dealer.getHand());
 
@@ -42,9 +42,12 @@ public class Table {
         formatter.getCardInfo(dealerHand.get(0));
     }
 
-    private int calculateScore(ArrayList<Card> cards) {
+    private int calculateScore(ArrayList<Card> cards, boolean isDealer) {
         int score = 0;
         for(Card card: cards) {
+            if (card.isAce() && isDealer) {
+                card.setValue(11);
+            }
             score += card.getValue();
         }
         return score;
@@ -52,9 +55,9 @@ public class Table {
     protected void playGame(int playerChoice, ArrayList<Card> deck, Player player, Dealer dealer ) {
         if (playerChoice == 1) {
             player.addCard(dealCard(deck));
-            System.out.println("Your score is " + calculateScore(player.getHand()));
+            System.out.println("Your score is " + calculateScore(player.getHand(), false));
         } else if (playerChoice == 2) {
-            System.out.println("Dealer score is: " + calculateScore(dealer.getHand()));
+            System.out.println("Dealer score is: " + calculateScore(dealer.getHand(), true));
             dealer.addCard(dealCard(deck));
         }
     }
