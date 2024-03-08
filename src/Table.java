@@ -22,8 +22,8 @@ public class Table {
             dealer.addCard(dealCard(tableDeck));
         }
 
-        firstDealerRead(dealer.getHand());
-        readCards(player.getHand(), false);
+        dealer.firstDealerRead(formatter);
+        player.readHand(formatter);
 
     }
 
@@ -32,39 +32,20 @@ public class Table {
         return deck.remove(index);
     }
 
-    private int readCards(ArrayList<Card> dealtCards, boolean isDealer) {
-        int score = 0;
-        String entity = isDealer ? "Dealer" : "You";
-        System.out.println(entity + " have:");
-
-        for (Card card : dealtCards) {
-            if (card.isAce() && isDealer) {
-                card.setValue(11);
-            }
-            score += card.getValue();
-            formatter.getCardInfo(card);
-        }
-
-        System.out.println(entity + " score is " + score);
-        return score;
-    }
-
-    private void firstDealerRead(ArrayList<Card> dealerHand) {
-        System.out.println("\nThe dealer is showing...");
-        formatter.getCardInfo(dealerHand.get(0));
-    }
-
     protected void playGame(int playerChoice, ArrayList<Card> deck, Player player, Dealer dealer) {
-
         if (playerChoice == 1) {
             player.addCard(dealCard(deck));
-            player.setScore(readCards(player.getHand(), false));
+            player.readHand(formatter);
+            System.out.println(player.getName() + " has a score of: " + player.getScore());
             if (player.getScore() > 21) {
                 System.out.println("Bust....");
             }
         } else if (playerChoice == 2) {
             dealer.addCard(dealCard(deck));
-            readCards(dealer.getHand(), true);
+            dealer.readHand(formatter);
+            if (dealer.getScore() > 21) {
+                System.out.println("Dealer busts..." + dealer.getScore());
+            }
         }
     }
 

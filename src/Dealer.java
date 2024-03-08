@@ -1,21 +1,16 @@
 import lombok.Getter;
-import lombok.Setter;
 
 import java.util.ArrayList;
-
 @Getter
 public class Dealer implements CardHolder {
 
     private final ArrayList<Card> hand;
 
-    @Setter
     private int score;
-
     public Dealer() {
         this.hand = new ArrayList<>();
         this.score = 0;
     }
-
     @Override
     public void addCard(Card card) {
         this.hand.add(card);
@@ -27,18 +22,28 @@ public class Dealer implements CardHolder {
     }
 
     @Override
-    public int getScore(ArrayList<Card> hand) {
-        for (Card card : hand) {
+    public int getScore() {
+        int score = 0;
+        for (Card card : this.hand) {
             if (card.isAce()) {
                 card.setValue(11);
             }
-            this.score += card.getValue();
+            score += card.getValue();
         }
+        this.score = score;
         return this.score;
     }
 
     @Override
-    public void readHand() {
-
+    public void readHand(Formatter formatter) {
+        System.out.println("Dealer has: ");
+        for (Card card: this.hand) {
+            formatter.getCardInfo(card);
+        }
+    }
+    public void firstDealerRead(Formatter formatter) {
+        System.out.println("\nThe dealer is showing...");
+        formatter.getCardInfo(this.hand.get(0));
+        System.out.println("\n");
     }
 }

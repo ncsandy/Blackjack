@@ -6,15 +6,13 @@ import java.util.ArrayList;
 @Getter
 public class Player implements CardHolder {
 
-    @Setter
+    @Getter @Setter
     private String name;
 
     @Setter
     private int money;
     private final ArrayList<Card> hand;
 
-    @Getter
-    @Setter
     private int score;
 
     Player(String name) {
@@ -34,14 +32,19 @@ public class Player implements CardHolder {
     }
 
     @Override
-    public int getScore(ArrayList<Card> hand) {
-        for (Card card : hand) {
-            this.score += card.getValue();
+    public int getScore() {
+        int score = 0;
+        for (Card card : this.hand) {
+            score += card.getValue();
         }
+        this.score = score;
         return this.score;
     }
     @Override
-    public void readHand() {
-
+    public void readHand(Formatter formatter) {
+        System.out.println(this.getName() + " has ");
+        for (Card card: this.hand) {
+            formatter.getCardInfo(card);
+        }
     }
 }
