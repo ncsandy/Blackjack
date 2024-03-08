@@ -31,24 +31,9 @@ public class Table {
         int index = random.nextInt(deck.size());
         return deck.remove(index);
     }
+    protected void playGame(ArrayList<Card> deck, Player player, Dealer dealer) {
 
-    protected void playGame(int playerChoice, ArrayList<Card> deck, Player player, Dealer dealer) {
-        if (playerChoice == 1) {
-            player.addCard(dealCard(deck));
-            player.readHand(formatter);
-            System.out.println(player.getName() + " has a score of: " + player.getScore());
-            if (player.getScore() > 21) {
-                System.out.println("Bust....");
-            }
-        } else if (playerChoice == 2) {
-            dealer.addCard(dealCard(deck));
-            dealer.readHand(formatter);
-            if (dealer.getScore() > 21) {
-                System.out.println("Dealer busts..." + dealer.getScore());
-            }
-        }
     }
-
     protected int validateInput() {
         int selection = 0;
         do {
@@ -57,9 +42,11 @@ public class Table {
                 switch (selection) {
                     case 1:
                         System.out.println("You chose hit");
+
                         break;
                     case 2:
                         System.out.println("You chose stay");
+
                         break;
                     default:
                         System.out.println("Let's try that again!");
@@ -71,4 +58,5 @@ public class Table {
         } while (selection != 1 && selection != 2);
         return selection;
     }
+
 }

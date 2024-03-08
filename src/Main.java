@@ -40,7 +40,7 @@ public class Main {
         messages.getPlayerAction();
 
         // Get Player input for hit/stay
-       table.playGame(table.validateInput(), tableDeck, player, dealer);
+       table.playGame(tableDeck, player, dealer);
 
     }
     private Player createPlayer() {
