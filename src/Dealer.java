@@ -8,7 +8,7 @@ public class Dealer implements CardHolder {
 
     private final ArrayList<Card> hand;
 
-    @Getter @Setter
+    @Setter
     private int score;
 
     public Dealer() {
@@ -26,4 +26,19 @@ public class Dealer implements CardHolder {
         this.hand.clear();
     }
 
+    @Override
+    public int getScore(ArrayList<Card> hand) {
+        for (Card card : hand) {
+            if (card.isAce()) {
+                card.setValue(11);
+            }
+            this.score += card.getValue();
+        }
+        return this.score;
+    }
+
+    @Override
+    public void readHand() {
+
+    }
 }

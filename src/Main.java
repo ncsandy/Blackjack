@@ -25,7 +25,7 @@ public class Main {
 
         // Create Table object
 
-        Table table = new Table();
+        Table table = new Table(scanner);
 
         // Get number of decks from player
         int numberOfDecks = getNumberOfDecksFromPlayer();
@@ -40,16 +40,15 @@ public class Main {
         messages.getPlayerAction();
 
         // Get Player input for hit/stay
-       table.playGame(validateInput(), tableDeck, player, dealer);
-
-
+       table.playGame(table.validateInput(), tableDeck, player, dealer);
 
     }
     private Player createPlayer() {
         System.out.println("What is your name?");
         String playerName = getPlayerInput();
         return new Player(playerName.isEmpty() ? "Player 1" : playerName);
-    }private int getNumberOfDecksFromPlayer() {
+    }
+    private int getNumberOfDecksFromPlayer() {
         Formatter formatter = new Formatter();
         System.out.println("How many decks would you like to play with?");
         return formatter.convertToInt(getPlayerInput());
@@ -65,21 +64,5 @@ public class Main {
     private void dealCardsOnTable(ArrayList<Card> cards, Player player, Dealer dealer, Table table) {
         table.dealCards(cards, player, dealer);
     }
-    private int validateInput() {
-        int selection;
-        do {
-            selection = Integer.parseInt(scanner.nextLine());
-            switch (selection) {
-                case 1:
-                    System.out.println("You chose hit");
-                    break;
-                case 2:
-                    System.out.println("You chose stay");
-                    break;
-                default:
-                    System.out.println("Let's try that again!");
-            }
-        } while (selection != 1 && selection != 2);
-        return selection;
-    }
+
 }

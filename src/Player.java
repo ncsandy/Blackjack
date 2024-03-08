@@ -13,7 +13,8 @@ public class Player implements CardHolder {
     private int money;
     private final ArrayList<Card> hand;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     private int score;
 
     Player(String name) {
@@ -21,13 +22,26 @@ public class Player implements CardHolder {
         this.hand = new ArrayList<>();
         this.score = 0;
     }
+
     @Override
     public void addCard(Card card) {
         this.hand.add(card);
     }
+
     @Override
     public void clearHand() {
         this.hand.clear();
     }
 
+    @Override
+    public int getScore(ArrayList<Card> hand) {
+        for (Card card : hand) {
+            this.score += card.getValue();
+        }
+        return this.score;
+    }
+    @Override
+    public void readHand() {
+
+    }
 }
