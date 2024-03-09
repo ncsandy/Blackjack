@@ -32,8 +32,9 @@ public class Main {
         Table table = new Table(scanner, tableDeck, player, dealer);
 
         // Get Player input for hit/stay
-        table.playGame();
-
+        while (true) {
+            table.playGame();
+        }
     }
     private Player createPlayer() {
         System.out.println("What is your name?");

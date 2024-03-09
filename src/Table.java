@@ -1,4 +1,4 @@
-import java.security.spec.RSAOtherPrimeInfo;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
@@ -38,6 +38,9 @@ public class Table {
             }
         }
         evaluateGame();
+        resetHands();
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
     }
 
     private void dealCards() {
@@ -95,10 +98,18 @@ public class Table {
     private void evaluateGame() {
         int playerScore = player.getScore();
         int dealerScore = dealer.getScore();
-        if (playerScore > dealerScore && playerScore <= 21 || dealerScore > 21) {
+
+        if (playerScore == dealerScore) {
+            System.out.println("Push!");
+        } else if (playerScore > dealerScore && playerScore <= 21 || dealerScore > 21) {
             System.out.println("Player wins! With a score of " + playerScore);
         } else {
             System.out.println("Dealer wins! With a score of " + dealerScore);
         }
+    }
+
+    private void resetHands() {
+        player.clearHand();
+        dealer.clearHand();
     }
 }
