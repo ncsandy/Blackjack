@@ -44,6 +44,5 @@ public class Dealer implements CardHolder {
     public void firstDealerRead(Formatter formatter) {
         System.out.println("\nThe dealer is showing...");
         formatter.getCardInfo(this.hand.get(0));
-        System.out.println("\n");
     }
 }

@@ -23,24 +23,16 @@ public class Main {
         //Create Dealer object
         Dealer dealer = new Dealer();
 
-        // Create Table object
-
-        Table table = new Table(scanner);
-
         // Get number of decks from player
         int numberOfDecks = getNumberOfDecksFromPlayer();
 
         // Create and shuffle deck
         ArrayList<Card> tableDeck = createAndShuffleDeck(numberOfDecks);
 
-        // Deal cards, and calculate scores
-        dealCardsOnTable(tableDeck,player,dealer, table);
-
-        // Display Message
-        messages.getPlayerAction();
+        Table table = new Table(scanner, tableDeck, player, dealer);
 
         // Get Player input for hit/stay
-       table.playGame(tableDeck, player, dealer);
+        table.playGame();
 
     }
     private Player createPlayer() {
@@ -57,12 +49,8 @@ public class Main {
         DeckCreator deckCreator = new DeckCreator(numberOfDecks);
         return deckCreator.getDeck();
     }
-
     private String getPlayerInput() {
         return scanner.nextLine();
-    }
-    private void dealCardsOnTable(ArrayList<Card> cards, Player player, Dealer dealer, Table table) {
-        table.dealCards(cards, player, dealer);
     }
 
 }
