@@ -25,7 +25,6 @@ public class Player implements CardHolder {
     public void addCard(Card card) {
         this.hand.add(card);
     }
-
     @Override
     public void clearHand() {
         this.hand.clear();

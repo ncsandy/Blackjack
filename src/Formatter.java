@@ -1,5 +1,3 @@
-
-
 public class Formatter {
     int convertToInt(String playerInput) {
         int parsedNumber = 0;
