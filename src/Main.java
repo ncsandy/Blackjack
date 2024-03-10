@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -8,7 +7,6 @@ public class Main {
         this.scanner = new Scanner(System.in); // Create a single Scanner object
         this.messages = new Messages(); // Create message object since it will be used quite a bit
     }
-
     public static void main(String[] args){
         // Main Game Loop
         Main main = new Main();
@@ -26,10 +24,7 @@ public class Main {
         // Get number of decks from player
         int numberOfDecks = getNumberOfDecksFromPlayer();
 
-        // Create and shuffle deck
-        ArrayList<Card> tableDeck = createAndShuffleDeck(numberOfDecks);
-
-        Table table = new Table(scanner, tableDeck, player, dealer);
+        Table table = new Table(scanner, player, dealer, numberOfDecks);
 
         // Get Player input for hit/stay
         while (true) {
@@ -46,12 +41,7 @@ public class Main {
         System.out.println("How many decks would you like to play with?");
         return formatter.convertToInt(getPlayerInput());
     }
-    private ArrayList<Card> createAndShuffleDeck(int numberOfDecks) {
-        DeckCreator deckCreator = new DeckCreator(numberOfDecks);
-        return deckCreator.getDeck();
-    }
     private String getPlayerInput() {
         return scanner.nextLine();
     }
-
 }

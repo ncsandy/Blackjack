@@ -1,4 +1,4 @@
-import java.util.Scanner;
+
 
 public class Formatter {
     int convertToInt(String playerInput) {

@@ -6,23 +6,25 @@ import java.util.Scanner;
 public class Table {
     private final Random random = new Random();
     private final Formatter formatter = new Formatter();
+    private final DeckCreator deckCreator = new DeckCreator();
     private final Scanner scanner;
-    private final ArrayList<Card> tableDeck;
+    private ArrayList<Card> tableDeck;
     private final Player player;
     private final Dealer dealer;
 
-    public Table(Scanner scanner, ArrayList<Card> tableDeck, Player player, Dealer dealer) {
+    public Table(Scanner scanner, Player player, Dealer dealer, int decks) {
         this.scanner = scanner;
-        this.tableDeck = tableDeck;
         this.player = player;
+        tableDeck = deckCreator.tableDeck(decks);
         this.dealer = dealer;
     }
 
     public void playGame() {
         dealCards();
+
         while (true) {
             if (player.getScore() == 21) {
-                System.out.printf("Blackjack !");
+                System.out.print("Blackjack !");
                 break;
             }
             int selection = getPlayerInput();
@@ -39,13 +41,15 @@ public class Table {
         }
         evaluateGame();
         resetHands();
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
     }
 
     private void dealCards() {
-        if (tableDeck.isEmpty() || player == null || dealer == null) {
-            throw new IllegalArgumentException("One of the parameters is invalid");
+        if (player == null || dealer == null) {
+            throw new IllegalArgumentException("Player or Dealer are null...");
+        }
+
+        if (tableDeck.isEmpty() || tableDeck.size() > 3) {
+            tableDeck = deckCreator.tableDeck(1);
         }
 
         for (int i = 0; i < 2; i++) {
@@ -55,6 +59,11 @@ public class Table {
 
         dealer.firstDealerRead(formatter);
         player.readHand(formatter);
+
+        if (player.getScore() == 21) {
+            System.out.println("BlackJack!");
+            return;
+        }
 
         System.out.println("1.) Hit or 2.) Stay?");
     }
@@ -107,7 +116,6 @@ public class Table {
             System.out.println("Dealer wins! With a score of " + dealerScore);
         }
     }
-
     private void resetHands() {
         player.clearHand();
         dealer.clearHand();

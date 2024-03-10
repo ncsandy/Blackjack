@@ -10,7 +10,7 @@ import java.util.stream.IntStream;
 public class DeckCreator {
 
     ArrayList<Card> deck;
-    public ArrayList<Card> dealerDeck(int decks) {
+    public ArrayList<Card> createDecks(int decks) {
         return IntStream.range(0, decks)
                 .mapToObj(i -> createDeck())
                 .flatMap(ArrayList::stream)
@@ -45,15 +45,15 @@ public class DeckCreator {
             deck.add(card);
         }
     }
-    public ArrayList<Card> shuffleDeck(ArrayList<Card> deck){
+    public void shuffleDeck(ArrayList<Card> deck){
         Collections.shuffle(deck);
-        return deck;
     }
 
-    public DeckCreator(int numberDecks) {
-       ArrayList <Card> deck;
-       deck = dealerDeck(numberDecks);
-       shuffleDeck(deck);
-       this.deck = deck;
+    public ArrayList<Card> tableDeck(int numberDecks) {
+        this.deck = createDecks(numberDecks);
+        shuffleDeck(this.deck);
+        return this.deck;
     }
+
+    public DeckCreator() {}
 }
