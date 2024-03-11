@@ -20,13 +20,13 @@ public class DeckCreator {
         ArrayList<Card> deck = new ArrayList<>();
 
         for (Suite suite : Suite.values()) {
-            for (int i = 1; i <= 13; i++) {
+            for (int i = 2; i <= 14; i++) {
                 Card card = new Card();
                 card.setSuite(suite);
                 card.setValue(i);
-                card.setAce(i == 1);
+                card.setAce(i == 11);
 
-                if (i >= 11) {
+                if (i >= 12) {
                     creatSuite(suite, deck);
                     break;
                 }

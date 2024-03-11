@@ -11,7 +11,9 @@ public class Player implements CardHolder {
 
     @Setter
     private int money;
-    private final ArrayList<Card> hand;
+
+    @Getter @Setter
+    private ArrayList<Card> hand;
 
     private int score;
 
@@ -33,9 +35,18 @@ public class Player implements CardHolder {
     @Override
     public int getScore() {
         int score = 0;
+        int numOfAces = 0;
         for (Card card : this.hand) {
             score += card.getValue();
+            if (card.isAce()) {
+                numOfAces++;
+            }
+            if (score > 21 && numOfAces > 0) {
+                numOfAces -= 1;
+                score -= 10;
+            }
         }
+
         this.score = score;
         return this.score;
     }

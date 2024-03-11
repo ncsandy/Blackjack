@@ -66,7 +66,6 @@ public class Table {
 
         System.out.println("1.) Hit or 2.) Stay?");
     }
-
     private int getPlayerInput() {
         int selection = 0;
         while (true) {

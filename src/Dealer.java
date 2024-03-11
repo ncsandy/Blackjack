@@ -25,9 +25,6 @@ public class Dealer implements CardHolder {
     public int getScore() {
         int score = 0;
         for (Card card : this.hand) {
-            if (card.isAce()) {
-                card.setValue(11);
-            }
             score += card.getValue();
         }
         this.score = score;

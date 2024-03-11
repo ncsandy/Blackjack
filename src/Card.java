@@ -20,4 +20,10 @@ public class Card {
     boolean ace;
     public Card() {
     }
+    public Card(Suite suite, Face face, int value, boolean ace) {
+        this.suite = suite;
+        this.face = face;
+        this.value = value;
+        this.ace = ace;
+    }
 }
